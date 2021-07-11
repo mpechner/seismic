@@ -13,3 +13,8 @@ https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitud
 
 ## concert from lat/long degress minutes to decimal
 https://www.latlong.net/degrees-minutes-seconds-to-decimal-degrees
+
+# Data Feed
+* https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
+* 4.5+ last 24 hours https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson
+* 2.5+ last 24 hours https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson
