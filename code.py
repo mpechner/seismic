@@ -65,6 +65,16 @@ def flashit(fillset):
         magtag.peripherals.neopixels.fill((0, 0, 0))
         time.sleep(.25)
 
+def get_data():
+    for dotry in range(5):
+        try:
+            magtag.url = eq_url
+            eq_data = json.loads(magtag.fetch())
+            return eq_data
+        except Exception as ex:
+            time.sleep(3)
+    return None
+
 buttons = [board.BUTTON_A]
 alarms = [alarm.pin.PinAlarm(pin=pin, value=False, pull=True) for pin in buttons]
 
@@ -82,24 +92,39 @@ if magtag.peripherals.battery < 2.9:
     )
     magtag.exit_and_deep_sleep(7200)
 
-
-
 local_lat = 37.35253
 local_long = -121.99609
 
-magtag.url = eq_url
-eq_data = json.loads(magtag.fetch())
+eq_data = get_data()
+if not eq_data:
+    deep_sleep()
+
 event_list = {}
 for event in eq_data['features']:
     dist = distance([local_lat, local_long], [event['geometry']['coordinates'][0], event['geometry']['coordinates'][1]])
     # print ( dist, event['properties']['place'], event['properties']['mag'])
-    event_list[dist] = "%5.2fkm %1.1f %s" % (dist, event['properties']['mag'],event['properties']['place'] )
+    event_list[dist] = "%5.0fkm %1.1f %s" % (dist, event['properties']['mag'],event['properties']['place'] )
+
+magtag.add_text(
+    text_position=(5,11),
+    is_data=False,
+    text_scale = 2)
+magtag.set_text("EQ 2.5+ Last 24H", index=0, auto_refresh=False)
 
 list_ev = sorted(event_list.keys())
-
+line = 1
 for ev in  list_ev:
     print(event_list[ev])
-    if ev < 100:
+    magtag.add_text(
+    text_position=(5, 20 +(line * 11)),
+    is_data=False)
+    magtag.set_text(event_list[ev], index=line, auto_refresh=False)
+
+    line += 1
+
+    if ev < 200:
         flashit((0,128,0))
+    if line > 7:
+        break
 
 deep_sleep()
