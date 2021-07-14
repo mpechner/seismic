@@ -4,6 +4,11 @@
 * Connect Seismic Sensor, set alarm, display event
 * Connect GPS or SD. SD, put secrets.py and local lat long on card.
 
+Well I screwed up.  The earthquake click has their own libraries.  I will dig into code from omron to figure out how to interface with circuit python. The board just seems to expose I2C.  But there are 2 other pins, int, int2 and setup I need to figureout. At $69, I'm not tossing the board.
+
+* Python https://github.com/omron-devhub/d7s-grove-raspberrypi/blob/master/README.md#d7s-grove-raspberrypi
+* arduino C++ https://github.com/omron-devhub/d7s-grove-arduino
+
 ## Secrets.py
 Do not check in secrets.py.  Just place at the top level of the project with code.py.
 ```python
