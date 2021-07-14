@@ -14,8 +14,11 @@ secrets = {
 ```
 # Hardware
 Controller AdaFruit MagTag https://www.adafruit.com/product/4800
+
 Seismic Sensor https://www.mikroe.com/earthquake-click
+
 GPS: https://www.adafruit.com/product/4415
+
 Power: https://www.adafruit.com/product/328
 
 
