@@ -1,5 +1,5 @@
 import board
-import neopixel
+#import neopixel
 import time
 import busio
 import math
@@ -10,8 +10,16 @@ from time import sleep
 from gc import collect
 import alarm
 from alarm.pin import PinAlarm
+from adafruit_portalbase import PortalBase
+
+
+#resp = json.loads('{"type":"Point","coordinates":[-178.3804,-20.6238,559.13]}')
+#print(resp)
+
+
 
 eq_url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson"
+# eq_url = "http://wedding.mikey.com/fmt.json"
 
 # https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
 # Thanks Fred W6BSD for python from stack overflow
@@ -66,12 +74,23 @@ def flashit(fillset):
         time.sleep(.25)
 
 def get_data():
-    for dotry in range(5):
+    # pbase = PortalBase()
+
+    for dotry in range(1):
         try:
             magtag.url = eq_url
-            eq_data = json.loads(magtag.fetch())
+            fetched_data = magtag.fetch()
+            #magtag.network.connect()
+            #fetched_data = magtag.network.fetch(eq_url,headers={"Content-type":"application/json; charset=utf-8 "})
+
+            # print("FETCHED", fetched_data)
+            # time.sleep(60)
+
+            eq_data = json.loads(fetched_data)
+            # print("\n \nEQ DATA", eq_data)
             return eq_data
         except Exception as ex:
+            print(ex)
             time.sleep(3)
     return None
 
@@ -101,9 +120,11 @@ if not eq_data:
 
 event_list = {}
 for event in eq_data['features']:
-    dist = distance([local_lat, local_long], [event['geometry']['coordinates'][0], event['geometry']['coordinates'][1]])
-    # print ( dist, event['properties']['place'], event['properties']['mag'])
-    event_list[dist] = "%5.0fkm %1.1f %s" % (dist, event['properties']['mag'],event['properties']['place'] )
+    # print(event['geometry'])
+    # print(type(event['geometry']['coordinates'][0]))
+    dist = distance([local_lat, local_long], [event['geometry']['coordinates'][1], event['geometry']['coordinates'][0]])
+    # print ( dist, event['properties']['place'], event['properties']['mag'], [event['geometry']['coordinates'][0], event['geometry']['coordinates'][1]])
+    event_list[int(dist)] = "%5.1fkm %1.1f %s" % (dist, event['properties']['mag'],event['properties']['place'] )
 
 magtag.add_text(
     text_position=(5,11),
@@ -112,9 +133,12 @@ magtag.add_text(
 magtag.set_text("EQ 2.5+ Last 24H", index=0, auto_refresh=False)
 
 list_ev = sorted(event_list.keys())
+for ev in  list_ev:
+    print(ev, event_list[ev])
+
 line = 1
 for ev in  list_ev:
-    print(event_list[ev])
+    # print(event_list[ev])
     magtag.add_text(
     text_position=(5, 20 +(line * 11)),
     is_data=False)
