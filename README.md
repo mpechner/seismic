@@ -1,5 +1,5 @@
 # seismic
-
+![Seismic](https://github.com/mpechner/seismic/blob/main/images/image.jpg)
 ## ToDo
 * Connect Seismic Sensor, set alarm, display event
 * Connect GPS or SD. SD, put secrets.py and local lat long on card.
