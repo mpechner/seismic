@@ -12,6 +12,7 @@ Did not screw up.   The board is a basic reference design.
 #### Circuit Python Code
 There is a bunch of code from omron.
 * The chips data sheet https://download.mikroe.com/documents/datasheets/d7s-datasheet.pdf - not alot here.
+* spec doc https://github.com/mpechner/seismic/blob/main/omrondocs/Omron%20D7S%20sensor.pdf
 * Python https://github.com/omron-devhub/d7s-grove-raspberrypi/blob/master/README.md#d7s-grove-raspberrypi
 ** grove_d7s.py needs to be ported to use Adafruit I2C libraries instead of smbus2 as well as the Pi GPIO definitions.
 
