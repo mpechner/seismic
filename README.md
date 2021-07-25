@@ -10,6 +10,11 @@ Well I screwed up.  The earthquake click has their own libraries.  I will dig in
 Did not screw up.   The board is a basic reference design. 
 
 #### Circuit Python Code
+Earthquake Click Board Docs
+* https://docs.rs-online.com/4bc1/0900766b815cdf69.pdf
+* https://docs.rs-online.com/4bc1/0900766b815cdf69.pdf
+* https://download.mikroe.com/documents/add-on-boards/click/earthquake/earthquake-click-schematic-v100.pdf
+
 There is a bunch of code from omron.
 * The chips data sheet https://download.mikroe.com/documents/datasheets/d7s-datasheet.pdf - not alot here.
 * spec doc https://github.com/mpechner/seismic/blob/main/omrondocs/Omron%20D7S%20sensor.pdf
