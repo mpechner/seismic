@@ -12,12 +12,13 @@ import grove_d7s
 
 # sensor.enter_diag()
 def get_diags():
-    sensor = grove_d7s.GroveD7s()
+    sensor = grove_d7s.GroveD7s(True)
+
     if sensor.isReady() == False:
         print('.')
         time.sleep(1.0)
 
-    print ("start diag")
+    print ("start diag State", sensor.getState(), " Event", sensor.getEvent())
 
 
 def waiton():
