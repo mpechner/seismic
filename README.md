@@ -61,9 +61,11 @@ https://www.latlong.net/degrees-minutes-seconds-to-decimal-degrees
 ## Requirements
 * adafruit_bitmap_font
 * adafruit_display_text
+* adafruit_fakerequests.mpy
 * adafruit_io
 * adafruit_magtag
+* adafruit_minimqtt
 * adafruit_portalbase
 * adafruit_requests.mpy
-* neopixel.mpy
+* neopixel_spi.mpy
 * simpleio.mpy
