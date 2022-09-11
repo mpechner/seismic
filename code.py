@@ -9,7 +9,6 @@ from secrets import secrets
 from time import sleep
 from gc import collect
 import alarm
-from alarm.pin import PinAlarm
 from adafruit_portalbase import PortalBase
 
 
